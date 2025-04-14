@@ -1,6 +1,6 @@
 {
   "name": "playwright-ahem-plugin",
-  "version": "1.0.3",
+  "version": "1.0.2",
   "description": "![npm](https://img.shields.io/npm/v/playwright-ahem-plugin) ![License](https://img.shields.io/npm/l/playwright-ahem-plugin)",
   "main": "index.js",
   "scripts": {
