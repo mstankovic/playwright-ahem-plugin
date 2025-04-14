@@ -53,3 +53,6 @@ pnpm-lock.yaml
 
 # TypeScript cache
 .tscache/
+
+# Other
+release_notes.txt
