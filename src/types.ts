@@ -1,36 +1,38 @@
-export interface Email {
-  id: string;
-  from: string;
-  to: string[];
-  subject: string;
-  text?: string;
-  html?: string;
-  attachments?: Attachment[];
-  isRead: boolean;
-  receivedAt: string;
-}
-
-export interface EmailFilterOptions {
-  from?: string;
-  to?: string;
-  subject?: string;
-  textContains?: string;
-  htmlContains?: string;
-  receivedAfter?: Date;
-  limit?: number;
-  markAsRead?: boolean;
-}
-
-export interface AhemPluginConfig {
-  baseUrl?: string;
-  defaultTimeout?: number;
-  pollInterval?: number;
-  cleanupAfterTest?: boolean;
-  defaultMailbox: string;
-}
-
-interface Attachment {
-  filename: string;
-  contentType: string;
-  size: number;
-}
+export interface AhemEmailMeta {
+    emailId: string;
+    subject: string;
+    timestamp: number;
+    isRead: boolean;
+    sender: {
+      address: string;
+      name: string;
+    };
+  }
+  
+  export interface AhemEmailFull {
+    _id: string;
+    subject: string;
+    html?: string;
+    text?: string;
+    textAsHtml?: string;
+    date: string;
+    timestamp: number;
+    attachments: any[];
+  
+    from: {
+      value: { address: string; name: string }[];
+      text: string;
+      html: string;
+    };
+  
+    to: {
+      value: { address: string; name: string }[];
+      text: string;
+      html: string;
+    };
+  
+    headers: Record<string, any>;
+    headerLines: { key: string; line: string }[];
+    messageId: string;
+  }
+  
