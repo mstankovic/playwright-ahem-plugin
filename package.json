@@ -1,6 +1,6 @@
 {
   "name": "playwright-ahem-plugin",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A Playwright plugin for testing emails with AHEM (Ad Hoc Email Server)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

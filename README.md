@@ -24,18 +24,18 @@ yarn add playwright-ahem-plugin --dev
 
 ### Basic Setup (playwright.config.ts)
 ```typescript
-import { PlaywrightTestConfig } from '@playwright/test';
+import { defineConfig } from '@playwright/test';
 
-const config: PlaywrightTestConfig = {
+export default defineConfig({
   use: {
     ahem: {
-      baseUrl: 'http://localhost:3000', // AHEM server URL
-      defaultTimeout: 30000,           // Default wait timeout (ms)
-      pollInterval: 1000,              // Email check frequency (ms)
-      defaultMailbox: 'inbox'          // Default mailbox for operations
+      baseUrl: 'https://ahem.server.rs',      // Your AHEM server
+      defaultTimeout: 30000,                  // How long to wait for an email
+      pollInterval: 1000,                     // How frequently to check for email
+      defaultMailbox: 'inbox'                 // Default mailbox to watch
     }
   }
-};
+});
 ```
 
 ## Usage
