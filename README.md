@@ -25,6 +25,7 @@ yarn add playwright-ahem-plugin --dev
 ### Basic Setup (playwright.config.ts)
 ```typescript
 import { defineConfig } from '@playwright/test';
+import 'playwright-ahem-plugin';
 
 export default defineConfig({
   use: {
