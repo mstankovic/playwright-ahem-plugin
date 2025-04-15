@@ -1,4 +1,5 @@
 src/
 tests/
+*.log
 *.ts
-!*.d.ts
+*.md
