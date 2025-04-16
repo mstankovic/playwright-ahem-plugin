@@ -1,4 +1,3 @@
-export { waitForEmail } from './commands/waitForEmail';
-export { deleteMailbox } from './commands/deleteMailbox';
-export { Email } from './models/Email';
-export { setAhemConfig } from './config';
+export { configureAhem } from './config';
+export { waitForEmail } from './waitForEmail';
+export { deleteMailbox } from './mailbox';

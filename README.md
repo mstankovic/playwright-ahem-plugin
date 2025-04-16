@@ -22,21 +22,16 @@ yarn add playwright-ahem-plugin --dev
 
 ## ⚙️ Configuration
 
-### Basic Setup (playwright.config.ts)
+### Setup
 ```typescript
-import { defineConfig } from '@playwright/test';
-import 'playwright-ahem-plugin';
+import { configureAhem } from 'playwright-ahem-plugin';
 
-export default defineConfig({
-  use: {
-    ahem: {
-      baseUrl: 'https://ahem.server.rs',      // Your AHEM server
-      defaultTimeout: 30000,                  // How long to wait for an email
-      pollInterval: 1000,                     // How frequently to check for email
-      defaultMailbox: 'inbox'                 // Default mailbox to watch
-    }
-  }
-});
+await configureAhem({
+    serverUrl: 'http://ahem.server.rs',  // AHEM server address
+    defaultMailbox: 'test-user',         // fallback mailbox (can override per call)
+    defaultTimeout: 30000,               // max wait time in ms (optional)
+    pollInterval: 3000,                  // polling frequency in ms (optional)
+  });
 ```
 
 ## Usage
@@ -48,34 +43,18 @@ import { waitForEmail, deleteMailbox } from 'playwright-ahem-plugin';
 test('should receive password reset email and extract link', async () => {
   const email = await waitForEmail({
     subject: /Reset Password/,
-    mailbox: 'test-user' //optional: override default mailbox
+    from: 'noreply@yourapp.com',
+    // mailbox: 'override-mailbox',     // optional override
+    // timeout: 20000,                  // optional override
+    // polling: 1000,                   // optional override
   });
 
-  const link = email.extractLink();  //get first link from body
-  console.log('Extracted reset link:', link);
+  const link = email.extractLink();
+  console.log('Extracted link:', link);
 
-  await email.markAsRead();          //mark as read
-  await email.delete();              //delete this specific email
+  await email.markAsRead();
+  await email.delete();
 
-  // Optional cleanup
-  await deleteMailbox('test-user');  //delete entire mailbox
+  await deleteMailbox('inbox');
 });
 ```
-
-Optional custom match:
-```typescript
-const email = await waitForEmail({
-  match: (email) => email.sender.address === 'noreply@techtailors.rs' && email.subject.includes('Confirm')
-});
-```
-
-Auto-cleanup After Tests (Optional):
-```typescript
-import { test } from '@playwright/test';
-import { deleteMailbox } from 'playwright-ahem-plugin';
-
-test.afterEach(async () => {
-  await deleteMailbox(); //Uses defaultMailbox from config
-});
-```
-
